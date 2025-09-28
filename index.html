@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Поиск похожих палеток с ColorHunt</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Поиск похожих палеток ColorHunt</h1>
+        <p>
+          Загрузите изображение, чтобы определить в нём доминантные цвета и найти
+          похожие палетки из базы ColorHunt. Для извлечения цветов используется
+          кластеризация <strong>k-means</strong>, а сравнение палеток выполняется по
+          <strong>Евклидову расстоянию</strong> в цветовом пространстве <strong>CIELAB</strong>.
+        </p>
+      </header>
+
+      <section class="uploader">
+        <label class="button" for="imageInput">Выберите изображение</label>
+        <input id="imageInput" type="file" accept="image/*" />
+        <p class="hint">
+          Изображение не отправляется на сервер – все вычисления выполняются прямо в
+          браузере.
+        </p>
+      </section>
+
+      <section class="preview" aria-live="polite">
+        <div class="preview__image" id="imagePreview">Выберите изображение…</div>
+        <canvas id="imageCanvas" hidden></canvas>
+      </section>
+
+      <section class="results" id="dominantColorsSection" hidden>
+        <h2>Доминантные цвета</h2>
+        <div class="swatches" id="dominantColors"></div>
+      </section>
+
+      <section class="results" id="similarPalettesSection" hidden>
+        <h2>Похожие палетки ColorHunt</h2>
+        <div class="palettes" id="similarPalettes"></div>
+      </section>
+    </main>
+
+    <template id="paletteTemplate">
+      <article class="palette-card">
+        <div class="palette-card__colors" data-role="colors"></div>
+        <footer>
+          <h3 data-role="title"></h3>
+          <p data-role="meta"></p>
+        </footer>
+      </article>
+    </template>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
